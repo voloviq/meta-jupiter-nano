@@ -1,0 +1,26 @@
+
+### Shell environment set up for builds. ###
+
+You can now run '[MACHINE=<machine>] bitbake <target>'
+
+Microchip supported machines are:
+- SAMA5D2 product family / sama5d27-jupiter-nano
+Note that most of the machine names above, have a SD Card variant that can be
+built by adding an "-sd" suffix to the machine name.
+
+Microchip targets are:
+    microchip-headless-image
+    microchip-graphics-image
+
+Common targets are:
+    core-image-minimal
+    core-image-sato
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86'
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
