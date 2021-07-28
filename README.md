@@ -100,7 +100,7 @@ TBD <br>
     **Note:** <br>
     Be 100% sure to provide a valid device name (**of=/dev/sde/mmcblk0**). Wrong name "/dev/sde/mmcblk0" dameage Your system file ! <br> <br>
         Nano version <br>
-    	***sudo dd if=~/yocto/tmp/deploy/images/jupiternano/console-image-jupiternano.sunxi-sdimg of=/dev/mmcblk0 bs=1024*** <br>
+    	***sudo dd if=~/yocto/tmp/deploy/images/jupiternano/qt5-image-jupiter-nano.wic of=/dev/mmcblk0 bs=1024*** <br>
 
 # Limitation
 
