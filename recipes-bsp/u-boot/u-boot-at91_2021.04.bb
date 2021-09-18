@@ -15,6 +15,7 @@ COMPATIBLE_MACHINE = '(jupiter-nano)'
 UBRANCH = "u-boot-2021.04-at91"
 
 SRC_URI = "git://github.com/linux4sam/u-boot-at91.git;protocol=https;branch=${UBRANCH}"
+SRC_URI += "file://001-add-jupiter-nano-dts-files-u-boot.patch"
 
 S = "${WORKDIR}/git"
 
