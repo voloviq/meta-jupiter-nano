@@ -20,13 +20,14 @@ KBRANCH = "linux-5.10-at91"
 KBRANCH_sama7g5ek-sd = "sama7g5_early"
 KBRANCH_sama7g5ek-emmc = "sama7g5_early"
 SRC_URI = "git://github.com/linux4sam/linux-at91.git;protocol=git;branch=${KBRANCH}"
+SRC_URI += "file://001-add-jupiter-nano-dts-files.patch"
 SRC_URI += "file://defconfig"
 SRC_URI_remove_sama7g5ek = "file://defconfig"
 
 # Add greengrass fragment for SAMA5D2 platforms
-SRC_URI_append_sama5d2 = "\
-    file://gg.cfg \
-"
+#SRC_URI_append_sama5d2 = "\
+#    file://gg.cfg \
+#"
 
 python __anonymous () {
     if d.getVar('UBOOT_FIT_IMAGE', True) == 'xyes':
