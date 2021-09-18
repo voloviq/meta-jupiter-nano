@@ -1,7 +1,7 @@
 require at91bootstrap_${PV}.bb
 
 SRC_URI += "file://0002-Enable-image-download-via-sam-ba.patch"
-SRC_URI += "file://001-add-jupiter-nano-at91bootstrap-config-file.patch"
+SRC_URI += "file://001-add-jupiter-nano-at91bootstrap-sam-ba-config-file.patch"
 
 AT91BOOTSTRAP_IMAGE .= "-sam-ba"
 AT91BOOTSTRAP_SYMLINK .= "-sam-ba"
