@@ -9,6 +9,7 @@ inherit deploy
 COMPATIBLE_MACHINE = '(jupiter-nano)'
 
 SRC_URI = "git://github.com/linux4sam/dt-overlay-at91.git;protocol=https"
+SRC_URI += "file://001-add-jupiter-nano-dt-overlay-at91-config-file.patch"
 
 PV = "1.0+git${SRCPV}"
 SRCREV = "7ad311899af48efbb43f0e3ac935da5981bd4b2d"
