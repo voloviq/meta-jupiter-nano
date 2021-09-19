@@ -10,6 +10,34 @@ index 780a754..2e16094 100644
  source "board/sama7g5ek/Config.in.linux_arg"
  source "contrib/board/Config.in.linux_arg"
  
+diff --git a/board/Config.in b/board/Config.in
+index 77e3afb..e5f6f49 100644
+--- a/board/Config.in
++++ b/board/Config.in
+@@ -27,6 +27,7 @@ source "board/sama5d2_ptc_ek/Config.in.board"
+ source "board/sama5d2_xplained/Config.in.board"
+ source "board/sama5d27_som1_ek/Config.in.board"
+ source "board/sama5d27_wlsom1_ek/Config.in.board"
++source "board/sama5d27_jupiter_nano_sd1/Config.in.board"
+ source "board/sama5d2_lpddr2sip_vb/Config.in.board"
+ source "board/sama5d2_icp/Config.in.board"
+ source "board/sam9x60ek/Config.in.board"
+@@ -58,6 +59,7 @@ config BOARDNAME
+ 	default "sama5d2_xplained" if SAMA5D2_XPLAINED
+ 	default "sama5d27_som1_ek" if SAMA5D27_SOM1_EK
+ 	default "sama5d27_wlsom1_ek" if SAMA5D27_WLSOM1_EK
++	default "sama5d27_jupiter_nano_sd1" if SAMA5D27_JUPITER_NANO
+ 	default "sama5d2_lpddr2sip_vb" if SAMA5D2_LPDDR2SIP_VB
+ 	default "sama5d2_icp" if SAMA5D2_ICP
+ 	default "sam9x60ek" if SAM9X60EK
+@@ -411,6 +413,7 @@ choice
+ 	default CPU_CLK_498MHZ if SAMA5D2_XPLAINED
+ 	default CPU_CLK_492MHZ if SAMA5D27_SOM1_EK
+ 	default CPU_CLK_492MHZ if SAMA5D27_WLSOM1_EK
++	default CPU_CLK_492MHZ if SAMA5D27_JUPITER_NANO
+ 	default CPU_CLK_498MHZ if SAMA5D2_LPDDR2SIP_VB
+ 
+ 
 diff --git b/board/sama5d27_jupiter_nano_sd1/Config.in.board b/board/sama5d27_jupiter_nano_sd1/Config.in.board
 new file mode 100644
 index 0000000..c38c6a6
@@ -44,11 +72,25 @@ index 0000000..1d6d96a
 @@ -0,0 +1,2 @@
 +CPPFLAGS += -DCONFIG_SAMA5D27_JUPITER_NANO
 +ASFLAGS += -DCONFIG_SAMA5D27_JUPITER_NANO
-diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano.c b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano.c
+diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1-bsrsd_uboot_defconfig b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1-bsrsd_uboot_defconfig
 new file mode 100644
-index 0000000..8bd0504
+index 0000000..62c11b8
 --- /dev/null
-+++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano.c
++++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1-bsrsd_uboot_defconfig
+@@ -0,0 +1,8 @@
++CONFIG_SAMA5D27_JUPITER_NANO=y
++CONFIG_MCK_BYPASS=y
++CONFIG_RAM_128MB=y
++CONFIG_LPDDR2=y
++CONFIG_SDCARD=y
++CONFIG_DEBUG=y
++# CONFIG_ENTER_NWD is not set
++CONFIG_BACKUP_MODE=y
+diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1.c b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1.c
+new file mode 100644
+index 0000000..22d65c7
+--- /dev/null
++++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1.c
 @@ -0,0 +1,491 @@
 +/* ----------------------------------------------------------------------------
 + *         Microchip Microprocessor (MPU) Software Team
@@ -91,7 +133,7 @@ index 0000000..8bd0504
 +#include "arch/at91_pio.h"
 +#include "arch/at91_ddrsdrc.h"
 +#include "arch/at91_sfr.h"
-+#include "sama5d27_jupiter_nano.h"
++#include "sama5d27_jupiter_nano_sd1.h"
 +#include "l2cc.h"
 +#include "arch/tz_matrix.h"
 +#include "matrix.h"
@@ -541,11 +583,11 @@ index 0000000..8bd0504
 +				 ATMEL_SDHC_GCKDIV_VALUE);
 +}
 +#endif
-diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano.h b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano.h
+diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1.h b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1.h
 new file mode 100644
 index 0000000..c4a1185
 --- /dev/null
-+++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano.h
++++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1.h
 @@ -0,0 +1,86 @@
 +/* ----------------------------------------------------------------------------
 + *         Microchip Microprocessor (MPU) Software Team
@@ -633,29 +675,15 @@ index 0000000..c4a1185
 +#endif
 +
 +#endif /* __SAMA5D27_WLSOM1_EK_H__ */
-diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1-bsrsd_uboot_defconfig b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1-bsrsd_uboot_defconfig
-new file mode 100644
-index 0000000..f58b24c
---- /dev/null
-+++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1-bsrsd_uboot_defconfig
-@@ -0,0 +1,8 @@
-+CONFIG_SAMA5D27_WLSOM1_EK=y
-+CONFIG_MCK_BYPASS=y
-+CONFIG_RAM_256MB=y
-+CONFIG_LPDDR2=y
-+CONFIG_SDCARD=y
-+CONFIG_DEBUG=y
-+# CONFIG_ENTER_NWD is not set
-+CONFIG_BACKUP_MODE=y
 diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1_linux_image_dt_defconfig b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1_linux_image_dt_defconfig
 new file mode 100644
-index 0000000..3f35aad
+index 0000000..76d18c2
 --- /dev/null
 +++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nano_sd1_linux_image_dt_defconfig
 @@ -0,0 +1,9 @@
-+CONFIG_SAMA5D27_WLSOM1_EK=y
++CONFIG_SAMA5D27_JUPITER_NANO=y
 +CONFIG_MCK_BYPASS=y
-+CONFIG_RAM_256MB=y
++CONFIG_RAM_128MB=y
 +CONFIG_LPDDR2=y
 +CONFIG_SDCARD=y
 +CONFIG_LOAD_LINUX=y
@@ -664,14 +692,29 @@ index 0000000..3f35aad
 +# CONFIG_ENTER_NWD is not set
 diff --git b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nanosd_uboot_defconfig b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nanosd_uboot_defconfig
 new file mode 100644
-index 0000000..8092ba9
+index 0000000..29c3521
 --- /dev/null
 +++ b/board/sama5d27_jupiter_nano_sd1/sama5d27_jupiter_nanosd_uboot_defconfig
 @@ -0,0 +1,7 @@
-+CONFIG_SAMA5D27_WLSOM1_EK=y
++CONFIG_SAMA5D27_JUPITER_NANO=y
 +CONFIG_MCK_BYPASS=y
-+CONFIG_RAM_256MB=y
++CONFIG_RAM_128MB=y
 +CONFIG_LPDDR2=y
 +CONFIG_SDCARD=y
 +CONFIG_DEBUG=y
 +# CONFIG_ENTER_NWD is not set
+diff --git a/include/board.h b/include/board.h
+index 47b84d6..5ab4d4c 100644
+--- a/include/board.h
++++ b/include/board.h
+@@ -116,6 +116,10 @@
+ #include "sama5d27_wlsom1_ek.h"
+ #endif
+ 
++#ifdef CONFIG_SAMA5D27_JUPITER_NANO
++#include "sama5d27_jupiter_nano_sd1.h"
++#endif
++
+ #ifdef CONFIG_SAMA5D2_LPDDR2SIP_VB
+ #include "sama5d2_lpddr2sip_vb.h"
+ #endif

@@ -420,9 +420,20 @@ index 8942d15..0ad5634 100644
 +
  #endif
 diff --git a/include/configs/sama5d2_xplained.h b/include/configs/sama5d2_xplained.h
-index 4f5ceca..2437d8f 100644
+index 4f5ceca..9ba0aaa 100644
 --- a/include/configs/sama5d2_xplained.h
 +++ b/include/configs/sama5d2_xplained.h
+@@ -12,8 +12,8 @@
+ #include "at91-sama5_common.h"
+ 
+ /* SDRAM */
+-#define CONFIG_SYS_SDRAM_BASE           0x20000000
+-#define CONFIG_SYS_SDRAM_SIZE		0x20000000
++#define CONFIG_SYS_SDRAM_BASE		0x20000000
++#define CONFIG_SYS_SDRAM_SIZE		0x8000000
+ 
+ #ifdef CONFIG_SPL_BUILD
+ #define CONFIG_SYS_INIT_SP_ADDR		0x218000
 @@ -31,9 +31,55 @@
  /* bootstrap + u-boot + env in sd card */
  #undef CONFIG_BOOTCOMMAND
