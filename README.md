@@ -65,7 +65,7 @@ TBD <br>
 
 5. Modify local.conf(located in ~/yocto/build/jupiternano/conf) file
 
-    - modify line with "MACHINE ??" to add "jupiternano"
+    - modify line with "MACHINE ??" to add "jupiter-nano"
 
     - align *DL_DIR = "${HOME}/yocto/downloads"* <br>
 
